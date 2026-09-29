@@ -2,6 +2,7 @@
 __pycache__/
 *.pyc
 .DS_Store
+desktop.ini
 data/logs.jsonl
 data/audit.jsonl
 .env

@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import os
 import time
+from contextlib import nullcontext
 from dataclasses import dataclass
+from typing import Any
 
 from . import metrics
 from .mock_llm import FakeLLM
@@ -38,6 +40,7 @@ class LabAgent:
         correlation_id: str,
     ) -> AgentResult:
         langfuse_client = get_langfuse_client()
+        trace_is_enabled = tracing_enabled()
         with propagate_attributes(
             user_id=hash_user_id(user_id),
             session_id=session_id,
@@ -51,13 +54,31 @@ class LabAgent:
             },
         ):
             started = time.perf_counter()
-            docs = retrieve(message)
+            retrieval_context = self._observation_context(
+                langfuse_client,
+                enabled=trace_is_enabled,
+                name="retrieval",
+                as_type="retriever",
+                input={"query_preview": summarize_text(message)},
+                metadata={
+                    "correlation_id": correlation_id,
+                    "feature": feature,
+                },
+            )
+            with retrieval_context as retrieval_observation:
+                docs = retrieve(message)
+                if retrieval_observation is not None:
+                    langfuse_client.update_current_span(
+                        output={"document_count": len(docs)},
+                        metadata={"matched": bool(docs)},
+                    )
+
             prompt = resolve_prompt(
                 langfuse_client,
                 feature=feature,
                 docs=docs,
                 message=message,
-                enabled=tracing_enabled(),
+                enabled=trace_is_enabled,
             )
             langfuse_client.update_current_span(
                 metadata={
@@ -71,13 +92,47 @@ class LabAgent:
                 },
                 version=prompt.version,
             )
-            # TODO (CP2): instrument retrieve() and FakeLLM.generate() as child
-            # observations. The nested generation must receive prompt, usage and cost.
             with propagate_attributes(prompt=prompt.managed_prompt):
-                response = self.llm.generate(prompt.text)
+                generation_context = self._observation_context(
+                    langfuse_client,
+                    enabled=trace_is_enabled,
+                    name="generation",
+                    as_type="generation",
+                    input={"prompt_preview": summarize_text(prompt.text)},
+                    metadata={
+                        "correlation_id": correlation_id,
+                        "prompt_name": prompt.name,
+                        "prompt_label": prompt.label,
+                        "prompt_version": prompt.version,
+                        "prompt_source": prompt.source,
+                    },
+                    model=self.model,
+                    prompt=prompt.managed_prompt,
+                )
+                with generation_context as generation_observation:
+                    response = self.llm.generate(prompt.text)
+                    cost_usd = self._estimate_cost(
+                        response.usage.input_tokens,
+                        response.usage.output_tokens,
+                    )
+                    if generation_observation is not None:
+                        langfuse_client.update_current_generation(
+                            output={"answer_preview": summarize_text(response.text)},
+                            model=response.model,
+                            usage_details={
+                                "input": response.usage.input_tokens,
+                                "output": response.usage.output_tokens,
+                                "total": (
+                                    response.usage.input_tokens
+                                    + response.usage.output_tokens
+                                ),
+                            },
+                            cost_details={"total": cost_usd},
+                            metadata={"ttft_ms": response.ttft_ms},
+                            prompt=prompt.managed_prompt,
+                        )
             quality_score = self._heuristic_quality(message, response.text, docs)
             latency_ms = int((time.perf_counter() - started) * 1000)
-            cost_usd = self._estimate_cost(response.usage.input_tokens, response.usage.output_tokens)
 
         metrics.record_request(
             latency_ms=latency_ms,
@@ -97,6 +152,17 @@ class LabAgent:
             cost_usd=cost_usd,
             quality_score=quality_score,
         )
+
+    def _observation_context(
+        self,
+        client: Any,
+        *,
+        enabled: bool,
+        **kwargs: Any,
+    ):
+        if enabled and callable(getattr(client, "start_as_current_observation", None)):
+            return client.start_as_current_observation(**kwargs)
+        return nullcontext(None)
 
     def _estimate_cost(self, tokens_in: int, tokens_out: int) -> float:
         input_cost = (tokens_in / 1_000_000) * 3

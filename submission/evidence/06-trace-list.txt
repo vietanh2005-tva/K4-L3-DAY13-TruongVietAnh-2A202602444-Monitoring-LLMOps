@@ -1,0 +1,20 @@
+Langfuse root traces: 18
+
+trace_id=c1a43e1786c901f25eb7028dcc53e33d | start=2026-09-29T07:30:53.573000+00:00 | latency_s=2.653 | correlation_id=req-6313c301 | prompt=day13-chat | label=production | version=1
+trace_id=f3f35759a759b12f8187ecc39fa1a939 | start=2026-09-29T07:30:50.918000+00:00 | latency_s=2.653 | correlation_id=req-596865be | prompt=day13-chat | label=production | version=1
+trace_id=dbdfdd1ad30040ef591665fc0ba4884b | start=2026-09-29T07:30:48.261000+00:00 | latency_s=2.654 | correlation_id=req-8de5e3d9 | prompt=day13-chat | label=production | version=1
+trace_id=e4421a77ea86c32aff84cca9dfa022a3 | start=2026-09-29T07:30:45.605000+00:00 | latency_s=2.654 | correlation_id=req-1f18d223 | prompt=day13-chat | label=production | version=1
+trace_id=2b8990365d9580165f79a6baf23c83c1 | start=2026-09-29T07:30:42.218000+00:00 | latency_s=3.383 | correlation_id=req-cce1e7c1 | prompt=day13-chat | label=production | version=1
+trace_id=e8c62112a3d7f036e3059117f3b8a978 | start=2026-09-29T07:29:30.161000+00:00 | latency_s=0.918 | correlation_id=req-d2000002 | prompt=day13-chat | label=production | version=2
+trace_id=cf48b0e571e7ffe9f71569c37e7db6c9 | start=2026-09-29T07:29:02.086000+00:00 | latency_s=0.897 | correlation_id=req-c2000002 | prompt=day13-chat | label=candidate | version=2
+trace_id=fd505d18326a4167233c50c8c2c20112 | start=2026-09-29T07:28:58.463000+00:00 | latency_s=0.96 | correlation_id=req-b1000001 | prompt=day13-chat | label=baseline | version=1
+trace_id=e61d6a355086b95fb2b17695fc87ac4f | start=2026-09-29T07:22:57.217000+00:00 | latency_s=0.399 | correlation_id=req-98665627 | prompt=day13-chat | label=production | version=local-v1
+trace_id=ca6d205a1bea5f5e9a8b62ac9346db1e | start=2026-09-29T07:22:56.821000+00:00 | latency_s=0.392 | correlation_id=req-e70eafef | prompt=day13-chat | label=production | version=local-v1
+trace_id=0d3a01bf6999a55e98c579883e80c7e6 | start=2026-09-29T07:22:56.411000+00:00 | latency_s=0.406 | correlation_id=req-796682a2 | prompt=day13-chat | label=production | version=local-v1
+trace_id=402a464d3fe272ba7252a3a4e41a9b13 | start=2026-09-29T07:22:55.991000+00:00 | latency_s=0.416 | correlation_id=req-1f8a9bac | prompt=day13-chat | label=production | version=local-v1
+trace_id=1537692d20a66286890557386766908d | start=2026-09-29T07:22:55.583000+00:00 | latency_s=0.404 | correlation_id=req-fde703f3 | prompt=day13-chat | label=production | version=local-v1
+trace_id=ae5f3f03bead49991700477ccb95fb2e | start=2026-09-29T07:22:55.172000+00:00 | latency_s=0.404 | correlation_id=req-cb91a42f | prompt=day13-chat | label=production | version=local-v1
+trace_id=8115e94b93cbc2d4256fbc2e6ec89863 | start=2026-09-29T07:22:54.751000+00:00 | latency_s=0.416 | correlation_id=req-63bfe466 | prompt=day13-chat | label=production | version=local-v1
+trace_id=11331bcf4a31f4aa5171bf4378f46303 | start=2026-09-29T07:22:54.350000+00:00 | latency_s=0.397 | correlation_id=req-0572c40b | prompt=day13-chat | label=production | version=local-v1
+trace_id=b7c842756e5f910faef2756e8824650f | start=2026-09-29T07:22:53.920000+00:00 | latency_s=0.426 | correlation_id=req-711bdb9d | prompt=day13-chat | label=production | version=local-v1
+trace_id=93cb53f1bb03af471f4715f61428b444 | start=2026-09-29T07:22:52.906000+00:00 | latency_s=1.005 | correlation_id=req-c99303b6 | prompt=day13-chat | label=production | version=local-v1

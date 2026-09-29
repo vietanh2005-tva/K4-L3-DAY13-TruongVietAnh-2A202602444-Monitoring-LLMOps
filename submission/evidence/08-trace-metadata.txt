@@ -1,0 +1,12 @@
+trace_id=dbdfdd1ad30040ef591665fc0ba4884b
+{
+  "correlation_id": "req-8de5e3d9",
+  "feature": "monitoring",
+  "model": "claude-sonnet-4-5",
+  "prompt_name": "day13-chat",
+  "prompt_label": "production",
+  "prompt_version": 1,
+  "prompt_source": "langfuse",
+  "query_preview": "Explain why metrics traces and logs work together.",
+  "doc_count": 1
+}

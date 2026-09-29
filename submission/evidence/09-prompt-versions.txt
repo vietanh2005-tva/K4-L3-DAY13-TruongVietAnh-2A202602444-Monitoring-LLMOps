@@ -1,0 +1,5 @@
+name=day13-chat
+v1 labels=['baseline', 'production'] template='Feature={{feature}}\nDocs={{docs}}\nQuestion={{message}}'
+v2 labels=['candidate', 'latest'] template='Feature={{feature}}\nDocs={{docs}}\nQuestion={{message}}\nAnswer concisely in 3 bullet points.'
+baseline_trace_id=fd505d18326a4167233c50c8c2c20112
+candidate_trace_id=cf48b0e571e7ffe9f71569c37e7db6c9

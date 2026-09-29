@@ -1,0 +1,6 @@
+Promote: production -> version 2
+production_v2_trace_id=e8c62112a3d7f036e3059117f3b8a978
+Rollback: production -> version 1
+current_production_version=1
+current_v1_labels=['baseline', 'production']
+current_v2_labels=['candidate', 'latest']

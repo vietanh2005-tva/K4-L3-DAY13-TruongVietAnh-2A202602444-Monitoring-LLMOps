@@ -1,0 +1,15 @@
+{
+  "ts": "2026-09-29T07:30:50.915664Z",
+  "event": "response_sent",
+  "correlation_id": "req-8de5e3d9",
+  "feature": "monitoring",
+  "model": "claude-sonnet-4-5",
+  "latency_ms": 2652,
+  "ttft_ms": 50,
+  "tokens_in": 35,
+  "tokens_out": 96,
+  "cost_usd": 0.001545,
+  "quality_score": 0.8,
+  "tool_name": "retrieval",
+  "tool_success": true
+}

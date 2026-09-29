@@ -1,0 +1,6 @@
+trace_id=dbdfdd1ad30040ef591665fc0ba4884b
+correlation_id=req-8de5e3d9
+
+name=lab-agent-run | type=AGENT | latency_s=2.654 | parent=ROOT | model=- | usage={} | cost={}
+name=retrieval | type=RETRIEVER | latency_s=2.502 | parent=d02f3a17d261f2cc | model=- | usage={} | cost={}
+name=generation | type=GENERATION | latency_s=0.151 | parent=d02f3a17d261f2cc | model=claude-sonnet-4-5 | usage={'input': 35, 'output': 96, 'total': 131} | cost={'total': 0.001545}

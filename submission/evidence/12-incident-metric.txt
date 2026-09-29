@@ -1,0 +1,6 @@
+challenge_id=day13-k4-l3a-monitoring-llmops-v1
+window=2026-09-29T07:30:42Z..2026-09-29T07:30:56Z
+latency_p95_ms=3382.0
+ttft_p95_ms=50.0
+threshold_ms=3000
+symptom=tail latency threshold breach

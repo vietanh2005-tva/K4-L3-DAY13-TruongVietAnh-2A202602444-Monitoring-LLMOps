@@ -10,6 +10,19 @@ from app.challenge import load_challenge
 
 
 class ChallengeConfigTests(unittest.TestCase):
+    def test_repository_uses_the_official_k4_l3a_challenge(self) -> None:
+        challenge = load_challenge()
+
+        self.assertEqual(challenge.cohort, "K4")
+        self.assertEqual(
+            challenge.challenge_id,
+            "day13-k4-l3a-monitoring-llmops-v1",
+        )
+        self.assertEqual(challenge.incident, "rag_slow")
+        self.assertEqual(challenge.seed, 1311)
+        self.assertEqual(challenge.affected_feature, "monitoring")
+        self.assertEqual(len(challenge.queries), 5)
+
     def test_missing_challenge_explains_that_coach_has_not_released_it(self) -> None:
         missing_path = Path(tempfile.gettempdir()) / "day13-missing-challenge.json"
         if missing_path.exists():

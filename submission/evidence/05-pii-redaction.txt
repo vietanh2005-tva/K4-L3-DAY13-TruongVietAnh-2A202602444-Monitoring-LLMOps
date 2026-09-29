@@ -1,0 +1,14 @@
+PII verification performed by tests and scripts/validate_logs.py.
+
+Covered PII patterns:
+- Email
+- Vietnamese phone numbers (compact, spaces, dots, hyphens, +84)
+- 12-digit CCCD
+- 16-digit payment card numbers
+- Passport numbers
+
+Observed workload example:
+Input preview contained a raw email address.
+Stored log preview contained [REDACTED_EMAIL].
+
+Validator result: Potential PII leaks detected: 0

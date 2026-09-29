@@ -83,6 +83,14 @@ python scripts/validate_dashboard.py
 python -m pytest -q
 ```
 
+Dashboard runtime sáu panel có tại `http://127.0.0.1:8000/dashboard` khi API đang chạy. Dashboard đọc `data/logs.jsonl`, dùng time range 60 phút và tự refresh mỗi 30 giây.
+
+Sau khi đã cấu hình Langfuse và chạy workload/challenge, có thể xuất lại evidence text cùng dashboard bằng:
+
+```bash
+python scripts/export_runtime_evidence.py
+```
+
 Baseline log chưa đạt là bình thường vì các `TODO` của CP1 chưa được làm. Ghi lại kết quả baseline vào `submission/REPORT.md` trước khi sửa.
 
 ## Lộ trình 14:00–18:00 (240 phút)

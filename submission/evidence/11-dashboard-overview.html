@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="30">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>K4-L3A Day 13 Monitoring Dashboard</title>
+<style>
+:root{--bg:#08111f;--panel:#111f33;--line:#263a55;--text:#e8f0fb;--muted:#91a4bd;--ok:#31d0aa;--bad:#ff6b7a;--accent:#70a5ff}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(145deg,#07101c,#0d1a2a);color:var(--text);font-family:Inter,Segoe UI,sans-serif}
+main{max-width:1400px;margin:auto;padding:30px} header{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:24px}
+h1{margin:0;font-size:30px} .meta{color:var(--muted);text-align:right;line-height:1.6} .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--ok);border-radius:14px;padding:20px;min-height:210px;box-shadow:0 14px 35px #0005}
+.card.alert{border-top-color:var(--bad)} .status{font-size:11px;letter-spacing:.12em;color:var(--ok);font-weight:700} .alert .status{color:var(--bad)}
+h2{font-size:17px;margin:16px 0 22px;color:#cfe0f8} .value{font-size:25px;font-weight:750;line-height:1.25} .secondary{font-size:16px;color:var(--muted);margin-top:10px}
+.threshold{margin-top:24px;border-top:1px solid var(--line);padding-top:14px;color:var(--accent);font-size:13px} footer{margin-top:20px;color:var(--muted);font-size:13px}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}} @media(max-width:620px){.grid{grid-template-columns:1fr}header{display:block}.meta{text-align:left;margin-top:10px}}
+</style></head><body><main>
+<header><div><h1>K4-L3A Day 13 · Monitoring &amp; LLMOps</h1><p>Runtime dashboard backed by <code>data/logs.jsonl</code></p></div>
+<div class="meta">Time range: Past 60 minutes<br>Refresh: 30 seconds<br>SLO: 99.5% successful requests ≤ 3000 ms</div></header>
+<section class="grid">
+        <article class="card alert">
+          <div class="status">THRESHOLD BREACH</div>
+          <h2>Latency percentiles and TTFT</h2>
+          <div class="value">P50 415 · P95 3382 · P99 3382 ms</div>
+          <div class="secondary">TTFT P95 50 ms</div>
+          <div class="threshold">SLO P95 ≤ 3000 ms</div>
+        </article>
+
+        <article class="card alert">
+          <div class="status">THRESHOLD BREACH</div>
+          <h2>Request traffic</h2>
+          <div class="value">15 requests</div>
+          <div class="secondary">0.25 requests/min</div>
+          <div class="threshold">Expected ≥ 1 request/min</div>
+        </article>
+
+        <article class="card ok">
+          <div class="status">WITHIN THRESHOLD</div>
+          <h2>Error rate and retrieval success</h2>
+          <div class="value">Errors 0.00%</div>
+          <div class="secondary">Retrieval success 100.00%</div>
+          <div class="threshold">Error rate ≤ 2%</div>
+        </article>
+
+        <article class="card ok">
+          <div class="status">WITHIN THRESHOLD</div>
+          <h2>Cost over time</h2>
+          <div class="value">$0.033774 total</div>
+          <div class="secondary">60-minute window</div>
+          <div class="threshold">Budget ≤ $2.50</div>
+        </article>
+
+        <article class="card ok">
+          <div class="status">WITHIN THRESHOLD</div>
+          <h2>Input and output tokens</h2>
+          <div class="value">Input 513</div>
+          <div class="secondary">Output 2,149</div>
+          <div class="threshold">Total ≤ 50,000 tokens</div>
+        </article>
+
+        <article class="card ok">
+          <div class="status">WITHIN THRESHOLD</div>
+          <h2>Quality proxy</h2>
+          <div class="value">0.867 / 1.000</div>
+          <div class="secondary">Mean heuristic score</div>
+          <div class="threshold">Quality ≥ 0.75</div>
+        </article>
+        </section>
+<footer>Source: structured JSON logs · Incident workflow: Metrics → Logs → Traces → Root cause</footer>
+</main></body></html>

@@ -32,3 +32,10 @@ Từ `submission/REPORT.md`, dẫn ảnh bằng đường dẫn tương đối:
 ```
 
 Không commit secret, API key, PII thô hoặc evidence của học viên/lớp khác.
+
+## Evidence runtime của bài này
+
+- `06`–`10`, `14`: ảnh được chụp trực tiếp trong project Langfuse cá nhân `day13-k4-l3a-2A202602444`; sidebar tài khoản đã được cắt để không lưu email cá nhân.
+- `11`: ảnh dashboard runtime tại `/dashboard`, đọc trực tiếp từ `data/logs.jsonl`; có thêm bản SVG và HTML.
+- Các file `.txt` cùng số thứ tự là bản xuất có thể kiểm tra bằng máy từ Langfuse API v4 hoặc structured log, không chứa secret/PII.
+- `scripts/export_runtime_evidence.py` tái tạo evidence text, dashboard SVG/HTML và đối chiếu trace/prompt IDs.
